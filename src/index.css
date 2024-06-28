@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.backgroundShorten {
+  background-image: url("./images/bg-shorten-desktop.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.backgroundBoost {
+  background-image: url("./images/bg-boost-desktop.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+@media screen and (min-width: 520px) {
+  .backgroundShorten {
+    background-image: url("./images/bg-shorten-desktop.svg");
+  }
+  .backgroundBoost {
+    background-image: url("./images/bg-boost-mobile.svg");
+  }
+}
+.inputDesign {
+  border: 4px solid hsl(0, 87%, 67%);
+}
+.inputDesign::placeholder {
+  color: hsl(0, 87%, 67%);
+}
