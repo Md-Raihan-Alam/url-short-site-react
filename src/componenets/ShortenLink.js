@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const ShortenLink = () => {
   const [linkURL, setLinkURL] = useState("");
@@ -6,31 +6,33 @@ const ShortenLink = () => {
   const [error, setError] = useState(false);
 
   const shortenAPI = async (urlLink) => {
-    const url = "https://cleanuri.com/api/v1/shorten";
-    const encodedUrlLink = encodeURIComponent(urlLink.trim());
+    const apiUrl = "https://smolurl.com/api/links";
 
     try {
-      const response = await fetch(url, {
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        body: `url=${encodedUrlLink}`,
+        body: JSON.stringify({
+          url: urlLink,
+        }),
       });
 
-      const ans = await response.json();
-
-      if (response.ok) {
-        setError(false);
-        setLinkURL("");
-        const shortenLink = ans.result_url;
-        setShortenedLinks((prevLinks) => [
-          ...prevLinks,
-          { originalLink: urlLink, shortenLink },
-        ]);
-      } else {
-        setError(true);
+      if (!response.ok) {
+        throw new Error("ERROR " + response.statusText);
       }
+
+      const data = await response.json();
+      const shortenLink = data.data.short_url;
+
+      setError(false);
+      setLinkURL("");
+      setShortenedLinks((prevLinks) => [
+        ...prevLinks,
+        { originalLink: urlLink, shortenLink },
+      ]);
     } catch (error) {
       console.error("Failed to shorten the link:", error);
       setError(true);
@@ -53,35 +55,38 @@ const ShortenLink = () => {
   };
 
   return (
-    <div className="w-full relative backgroundShorten flex flex-col tab:flex-row justify-center items-center h-min py-4 bg-darkViolet">
-      <div className="w-11/12 tab:w-[70%] pl-2 outline-none rounded-md py-2 my-5">
-        <input
-          type="text"
-          placeholder="shorten a link here..."
-          className={`w-full pl-2 outline-none rounded-md py-2 ${
-            error ? "inputDesign" : ""
-          }`}
-          value={linkURL}
-          onChange={(e) => setLinkURL(e.target.value)}
-        />
-        {error && (
-          <div
-            className="text-specialRed w-11/12 relative justify-start items-start font-bold flex"
-            id="warning"
-          >
-            Please add a valid link
-          </div>
-        )}
+    <div className="w-full relative backgroundShorten flex flex-col  justify-center items-center h-min py-4 bg-darkViolet">
+      <div className="w-full flex justify-center items-center tab:flex-row flex-col">
+        <div className="w-11/12 tab:w-[70%] pl-2 outline-none flex justify-center items-center rounded-md py-2 my-5">
+          <input
+            type="text"
+            placeholder="Shorten a link here..."
+            className={`w-full pl-2 outline-none rounded-md py-2 ${
+              error ? "inputDesign" : ""
+            }`}
+            value={linkURL}
+            onChange={(e) => setLinkURL(e.target.value)}
+          />
+          {error && (
+            <div
+              className="text-specialRed w-11/12 relative justify-start items-start font-bold flex"
+              id="warning"
+            >
+              Please add a valid link
+            </div>
+          )}
+        </div>
+        <button
+          className="w-11/12 relative tab:min-w-heroWidth tab:max-w-formWidth tab:ml-2 rounded-lg bg-cyan text-white font-bold py-3 my-5 hover:opacity-90"
+          onClick={handleShortenClick}
+        >
+          Shorten It!
+        </button>
       </div>
-      <button
-        className="w-11/12 relative tab:min-w-heroWidth tab:max-w-formWidth tab:ml-2 rounded-lg bg-cyan text-white font-bold py-3 my-5 hover:opacity-90"
-        onClick={handleShortenClick}
-      >
-        Shorten It!
-      </button>
+
       <div
         className="flex flex-col justify-center items-center my-5 w-11/12"
-        id="shorteLinkDiv"
+        id="shortenLinkDiv"
       >
         {shortenedLinks.map((link, index) => (
           <div
