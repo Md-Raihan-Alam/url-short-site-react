@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const Menu = ({ sideBar }) => (
   <div
@@ -19,12 +19,18 @@ const Menu = ({ sideBar }) => (
     <div className="cursor-pointer w-full h-10 flex justify-center text-white items-center">
       <span className="w-11/12 h-one bg-white"></span>
     </div>
-    <div className="cursor-pointer font-bold w-full h-10 flex justify-center text-white items-center">
+    <Link
+      to="/login"
+      className="cursor-pointer font-bold w-full h-10 flex justify-center text-white items-center"
+    >
       Login
-    </div>
-    <div className="cursor-pointer font-bold bg-cyan rounded-full w-full h-10 flex justify-center text-white items-center">
+    </Link>
+    <Link
+      to="/register"
+      className="cursor-pointer font-bold bg-cyan rounded-full w-full h-10 flex justify-center text-white items-center"
+    >
       Sign Up
-    </div>
+    </Link>
   </div>
 );
 
