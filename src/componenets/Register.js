@@ -1,5 +1,4 @@
-import React from "react";
-
+import { Link } from "react-router-dom";
 const Register = () => {
   return (
     <div className="flex justify-center backgroundShorten items-center min-h-screen bg-gray-100">
@@ -61,6 +60,12 @@ const Register = () => {
               Register
             </button>
           </div>
+          <Link
+            to="/login"
+            className="underline text-center text-sm text-zin-300"
+          >
+            Have an account? Login here
+          </Link>
         </form>
       </div>
     </div>

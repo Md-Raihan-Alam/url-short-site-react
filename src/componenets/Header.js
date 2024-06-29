@@ -2,6 +2,7 @@ import LOGO from "../images/logo.svg";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Menu from "./Menu";
+import { Link } from "react-router-dom";
 const Header = () => {
   const [sideBar, setSideBar] = useState(false);
   const showSideMenu = () => {
@@ -33,18 +34,18 @@ const Header = () => {
         </div>
       </div>
       <div className="hidden w-3/12 h-headerHeight tab:flex justify-end items-center overflow-visible">
-        <div
-          div
+        <Link
+          to="/login"
           className="cursor-pointer font-bold h-10 hidden tab:flex justify-end text-gray-600 items-center pr-6"
         >
           Login
-        </div>
-        <div
-          div
+        </Link>
+        <Link
+          to="/register"
           className="cursor-pointer font-bold bg-cyan rounded-full min-w-btnWidth h-10 hidden tab:flex justify-center hover:opacity-50 text-white items-center"
         >
           Sign Up
-        </div>
+        </Link>
       </div>
       <div className="flex tab:hidden" onClick={() => showSideMenu()}>
         <FaBars />
