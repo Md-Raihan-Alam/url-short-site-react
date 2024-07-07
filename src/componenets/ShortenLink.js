@@ -4,10 +4,10 @@ const ShortenLink = () => {
   const [linkURL, setLinkURL] = useState("");
   const [shortenedLinks, setShortenedLinks] = useState([]);
   const [error, setError] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const shortenAPI = async (urlLink) => {
     const apiUrl = "https://smolurl.com/api/links";
-
+    setLoading(true);
     try {
       const response = await fetch(apiUrl, {
         method: "POST",
@@ -33,9 +33,11 @@ const ShortenLink = () => {
         ...prevLinks,
         { originalLink: urlLink, shortenLink },
       ]);
+      setLoading(false);
     } catch (error) {
       console.error("Failed to shorten the link:", error);
       setError(true);
+      setLoading(true);
     }
   };
 
@@ -56,8 +58,8 @@ const ShortenLink = () => {
 
   return (
     <div className="w-full relative backgroundShorten flex flex-col  justify-center items-center h-min py-4 bg-darkViolet">
-      <div className="w-full flex justify-center items-center tab:flex-row flex-col">
-        <div className="w-11/12 tab:w-[70%] pl-2 outline-none flex justify-center items-center rounded-md py-2 my-5">
+      <div className="w-full flex justify-center items-start tab:flex-row flex-col">
+        <div className="w-11/12 tab:w-[70%] pl-2 flex-col outline-none flex justify-start items-start rounded-md py-2 my-5">
           <input
             type="text"
             placeholder="Shorten a link here..."
@@ -77,10 +79,11 @@ const ShortenLink = () => {
           )}
         </div>
         <button
-          className="w-11/12 relative tab:min-w-heroWidth tab:max-w-formWidth tab:ml-2 rounded-lg bg-cyan text-white font-bold py-3 my-5 hover:opacity-90"
+          className="w-11/12 relative tab:min-w-heroWidth tab:max-w-formWidth tab:ml-2 m rounded-lg mt-7 bg-cyan text-white font-bold py-3 my-5 hover:opacity-90"
           onClick={handleShortenClick}
+          disabled={loading}
         >
-          Shorten It!
+          {!loading ? "Shorten It!" : "Loading..."}
         </button>
       </div>
 
