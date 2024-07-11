@@ -37,7 +37,7 @@ const ShortenLink = () => {
     } catch (error) {
       console.error("Failed to shorten the link:", error);
       setError(true);
-      setLoading(true);
+      setLoading(false);
     }
   };
 
