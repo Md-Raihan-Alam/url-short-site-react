@@ -58,12 +58,12 @@ const ShortenLink = () => {
 
   return (
     <div className="w-full relative backgroundShorten flex flex-col  justify-center items-center h-min py-4 bg-darkViolet">
-      <div className="w-full flex justify-center items-start tab:flex-row flex-col">
-        <div className="w-11/12 tab:w-[70%] pl-2 flex-col outline-none flex justify-start items-start rounded-md py-2 my-5">
+      <div className="w-full flex justify-center items-center sm:items-start tab:flex-row flex-col">
+        <div className="w-11/12 tab:w-[70%] pl-2 flex-col outline-none flex justify-center items-center sm:justify-start sm:items-start s rounded-md py-2 my-5">
           <input
             type="text"
             placeholder="Shorten a link here..."
-            className={`w-full pl-2 outline-none rounded-md py-2 ${
+            className={`w-full pl-2 border-4 outline-none rounded-md py-2 ${
               error ? "inputDesign" : ""
             }`}
             value={linkURL}
