@@ -1,5 +1,6 @@
 import React from "react";
 import LOGO from "../images/logo.svg";
+import {Link} from "react-router-dom";
 import {
   FaFacebook,
   FaTwitter,
@@ -36,8 +37,8 @@ const Footer = () => {
       </div>
       <div className="w-full tab:w-auto h-min flex justify-center items-center">
         <div className="flex space-x-6">
-          <FaFacebook className="text-white text-3xl cursor-pointer" />
-          <FaLinkedin className="text-white text-3xl cursor-pointer" />
+          <Link to="https://web.facebook.com/people/Fahis/61562400830261/"><FaFacebook className="text-white text-3xl cursor-pointer" /></Link>
+          <Link to="https://www.linkedin.com/company/fahis-agency/"><FaLinkedin className="text-white text-3xl cursor-pointer" /></Link>
           <FaTwitter className="text-white text-3xl cursor-pointer" />
           <FaInstagram className="text-white text-3xl cursor-pointer" />
         </div>
