@@ -2,9 +2,9 @@ import React from "react";
 import LOGO from "../images/logo.svg";
 import {
   FaFacebook,
-  FaPinterest,
   FaTwitter,
   FaInstagram,
+  FaLinkedin,
 } from "react-icons/fa";
 
 const Footer = () => {
@@ -37,7 +37,7 @@ const Footer = () => {
       <div className="w-full tab:w-auto h-min flex justify-center items-center">
         <div className="flex space-x-6">
           <FaFacebook className="text-white text-3xl cursor-pointer" />
-          <FaPinterest className="text-white text-3xl cursor-pointer" />
+          <FaLinkedin className="text-white text-3xl cursor-pointer" />
           <FaTwitter className="text-white text-3xl cursor-pointer" />
           <FaInstagram className="text-white text-3xl cursor-pointer" />
         </div>
